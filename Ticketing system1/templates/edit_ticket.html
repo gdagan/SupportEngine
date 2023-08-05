@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Edit Ticket</title>
+</head>
+<body>
+  <h1>Edit Ticket</h1>
+
+  <form action="update_ticket" method="post">
+    <label for="category">Category:</label>
+    <select id="category" name="category">
+      <option value="Hardware">Hardware</option>
+      <option value="Software">Software</option>
+      <option value="Network">Network</option>
+    </select>
+    <br>
+
+    <label for="priority">Priority:</label>
+    <select id="priority" name="priority">
+      <option value="Low">Low</option>
+      <option value="Medium">Medium</option>
+      <option value="High">High</option>
+      <option value="Urgent">Urgent</option>
+    </select>
+    <br>
+
+    <label for="description">Description:</label>
+    <textarea id="description" name="description" rows="5" cols="30">Issue with the ticket</textarea>
+    <br>
+
+    <label for="status">Status:</label>
+    <select id="status" name="status">
+      <option value="Open">Open</option>
+      <option value="In Progress">In Progress</option>
+      <option value="Closed">Closed</option>
+    </select>
+    <br>
+
+    <input type="submit" value="Update Ticket">
+  </form>
+</body>
+</html>

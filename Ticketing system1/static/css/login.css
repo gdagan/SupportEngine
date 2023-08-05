@@ -1,0 +1,63 @@
+/* login css */
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #a4a1a1;
+}
+.container {
+  width: 300px;
+  margin: 0 auto;
+  margin-top: 15%;
+
+  
+}
+h2 {
+  text-align: left;
+  
+}
+.form-group {
+  margin-bottom: 15px;
+ 
+}
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+input[type="text"],
+input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+input[type="submit"] {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  background-color: #4CAF50;
+  color: #fff;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+}
+.message {
+  text-align: center;
+  color: red;
+  margin-top: 10px;
+}
+
+footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #333;
+  color: white;
+  text-align: center;
+}
+
+.reset-password {
+  text-align: center;
+  margin-top: 10px;
+}

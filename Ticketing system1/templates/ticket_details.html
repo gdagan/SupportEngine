@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Ticket Details</title>
+</head>
+<body>
+  <h1>Ticket Details</h1>
+
+  <div>
+    <h2>Ticket ID: 1</h2>
+    <p><strong>Status:</strong> Open</p>
+    <p><strong>Category:</strong> Hardware</p>
+    <p><strong>Priority:</strong> High</p>
+
+    <h3>Description</h3>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam malesuada tincidunt mauris ac luctus.</p>
+
+    <h3>Attachments</h3>
+    <ul>
+      <li><a href="attachments/file1.pdf">File 1</a></li>
+      <li><a href="attachments/file2.jpg">File 2</a></li>
+    </ul>
+
+    <h3>Comments</h3>
+    <div>
+      <p><strong>User1:</strong> Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+      <p><strong>User2:</strong> Aliquam tristique ligula quis urna pellentesque, eu convallis justo suscipit.</p>
+    </div>
+
+    <h3>Update Ticket</h3>
+    <form action="update_ticket" method="post">
+      <textarea name="comment" rows="3" cols="50"></textarea><br>
+      <input type="submit" value="Add Comment">
+    </form>
+  </div>
+</body>
+</html>

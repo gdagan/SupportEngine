@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">  
+   
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+
+<div class="logo">
+    <img src="static/images/logo.png" alt="SupportEngine Logo"
+    width="200" height="100" >
+</div>
+    
+  <div class="topnav">
+    <a class="active" href="main">Home</a>
+    <a href="technician_dashboard">Dashboard</a>
+    <a href="view_tickets">View Tickets</a>
+    <a href="kb_faq">Knowledge Base</a>
+    <a href="about">About Us</a>
+    <a href="contact_us">Contact Us</a>
+    <a href="technician_login">Login</a>
+  </div>
+        
+          
+  </div>
+  {% block head %} {% endblock %}
+</head>
+<body>
+    {% block body %} {% endblock %}
+
+</body>
+<footer>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <p>© 2023 SupportEngine Ticketing System. All Rights Reserved.</p>
+          {% block footer %} {% endblock %}
+        </div>
+      </div>
+    </div>
+  </footer>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Asset Management</title>
+</head>
+<body>
+  <h1>Asset Management</h1>
+
+  <h2>Add Asset</h2>
+  <form action="add_asset" method="post">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name">
+    <br>
+
+    <label for="category">Category:</label>
+    <select id="category" name="category">
+      <option value="Hardware">Hardware</option>
+      <option value="Software">Software</option>
+      <option value="Network">Network</option>
+    </select>
+    <br>
+
+    <label for="description">Description:</label>
+    <textarea id="description" name="description" rows="5" cols="30"></textarea>
+    <br>
+
+    <input type="submit" value="Add Asset">
+  </form>
+
+  <h2>Assets</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Category</th>
+        <th>Description</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Asset 1</td>
+        <td>Hardware</td>
+        <td>Asset description 1</td>
+        <td>
+          <a href="edit_asset">Edit</a> |
+          <a href="delete_asset">Delete</a>
+        </td>
+      </tr>
+      <!-- Add more asset rows as needed -->
+    </tbody>
+  </table>
+</body>
+</html>

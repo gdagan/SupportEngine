@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>View Ticket</title>
+  <script>
+    // Sample ticket data
+    var ticketData = {
+      ticketId: 'TCK-123',
+      category: 'Hardware',
+      priority: 'High',
+      description: 'Issue with the ticket',
+      status: 'Open',
+      attachments: [
+        { name: 'attachment1.jpg', url: '#' },
+        { name: 'attachment2.pdf', url: '#' }
+      ],
+      comments: [
+        { author: 'John', text: 'This is the first comment' },
+        { author: 'Jane', text: 'Here\'s a follow-up comment' }
+      ]
+    };
+
+    // Function to populate the ticket details
+    function populateTicketDetails() {
+      document.getElementById('ticket-id').value = ticketData.ticketId;
+      document.getElementById('category').value = ticketData.category;
+      document.getElementById('priority').value = ticketData.priority;
+      document.getElementById('description').value = ticketData.description;
+      document.getElementById('status').value = ticketData.status;
+
+      var attachmentsList = document.getElementById('attachments');
+      attachmentsList.innerHTML = '';
+      ticketData.attachments.forEach(function (attachment) {
+        var li = document.createElement('li');
+        var a = document.createElement('a');
+        a.href = attachment.url;
+        a.textContent = attachment.name;
+        li.appendChild(a);
+        attachmentsList.appendChild(li);
+      });
+
+      var commentsList = document.getElementById('comments');
+      commentsList.innerHTML = '';
+      ticketData.comments.forEach(function (comment) {
+        var li = document.createElement('li');
+        var authorSpan = document.createElement('span');
+        authorSpan.className = 'comment-author';
+        authorSpan.textContent = comment.author + ': ';
+        var textSpan = document.createElement('span');
+        textSpan.className = 'comment-text';
+        textSpan.textContent = comment.text;
+        li.appendChild(authorSpan);
+        li.appendChild(textSpan);
+        commentsList.appendChild(li);
+      });
+    }
+
+    // Call the function to populate the ticket details when the page loads
+    window.onload = populateTicketDetails;
+  </script>
+</head>
+<body>
+  <h1>View Ticket</h1>
+
+  <div>
+    <label for="ticket-id">Ticket ID:</label>
+    <input type="text" id="ticket-id" readonly>
+  </div>
+
+  <div>
+    <label for="category">Category:</label>
+    <input type="text" id="category" readonly>
+  </div>
+
+  <div>
+    <label for="priority">Priority:</label>
+    <input type="text" id="priority" readonly>
+  </div>
+
+  <div>
+    <label for="description">Description:</label>
+    <textarea id="description" rows="5" readonly></textarea>
+  </div>
+
+  <div>
+    <label for="status">Status:</label>
+    <input type="text" id="status" readonly>
+  </div>
+
+  <div>
+    <label for="attachments">Attachments:</label>
+    <ul id="attachments"></ul>
+  </div>
+
+  <div>
+    <label for="comments">Comments:</label>
+    <ul id="comments"></ul>
+  </div>
+</body>
+</html>

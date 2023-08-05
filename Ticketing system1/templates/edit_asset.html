@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Edit Asset</title>
+</head>
+<body>
+  <h1>Edit Asset</h1>
+
+  <form action="update_asset" method="post">
+    <input type="hidden" name="asset_id" value="1">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" value="Asset 1">
+    <br>
+
+    <label for="category">Category:</label>
+    <select id="category" name="category">
+      <option value="Hardware">Hardware</option>
+      <option value="Software">Software</option>
+      <option value="Network">Network</option>
+    </select>
+    <br>
+
+    <label for="description">Description:</label>
+    <textarea id="description" name="description" rows="5" cols="30">Asset description 1</textarea>
+    <br>
+
+    <input type="submit" value="Update Asset">
+  </form>
+</body>
+</html>
