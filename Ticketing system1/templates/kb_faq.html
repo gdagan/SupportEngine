@@ -1,47 +1,78 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Knowledge Base / FAQ</title>
-</head>
-<body>
-  <h1>Knowledge Base / FAQ</h1>
+{% extends "layout.html" %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+{% endblock %}
+
+{% block body %} 
+<h1>Knowledge Base / FAQ</h1>
 
   <form action="#" method="get">
-    <input type="text" id="search" name="search" placeholder="Search">
-    <button type="submit">Search</button>
+    <input type="text" placeholder="Search.." name="search" style="margin:auto;max-width:500px">
+    <button type="submit"><i class="fa fa-search"></i></button>
   </form>
 
   <h2>Categories</h2>
   <ul>
-    <li><a href="#category1">Category 1</a></li>
-    <li><a href="#category2">Category 2</a></li>
-    <!-- Add more category links as needed -->
+    <li><a href="#Hardware Knowledge Base Articles">Hardware</a></li>
+    <li><a href="#Software Knowledge Base Articles">Software</a></li>
+    <li><a href="#Telephony Knowledge Base Articles">Telephony</a></li>
+    <li><a href="#Servers Knowledge Base Articles"> Server</a></li>
+   
   </ul>
 
-  <h2 id="category1">Category 1</h2>
+  <h2 id="Hardware">Hardware</h2>
   <ul>
     <li>
-      <h3>Question 1</h3>
-      <p>Answer to Question 1 Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+      <h3>Article 1</h3>
+      <p></p>
     </li>
     <li>
-      <h3>Question 2</h3>
-      <p>Answer to Question 2 Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+      <h3>Article 2</h3>
+      <p></p>
     </li>
-    <!-- Add more questions and answers within the category -->
+    
   </ul>
 
-  <h2 id="category2">Category 2</h2>
+  <h2 id="Software">Software</h2>
   <ul>
     <li>
-      <h3>Question 3</h3>
-      <p>Answer to Question 3 Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+      <h3>Article 3</h3>
+      <p></p>
     </li>
     <li>
-      <h3>Question 4</h3>
-      <p>Answer to Question 4 Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+      <h3>Article 4</h3>
+      <p></p>
     </li>
-    <!-- Add more questions and answers within the category -->
+    
   </ul>
-</body>
-</html>
+  <h2 id="Telephony">Telephony</h2>
+  <ul>
+    <li>
+      <h3>Article 5</h3>
+      <p></p>
+    </li>
+    <li>
+      <h3>Article 6</h3>
+      <p></p>
+    </li>
+    
+  </ul>
+
+  <h2 id="Servers">Server</h2>
+  <ul>
+    <li>
+      <h3>Article 7</h3>
+      <p></p>
+    </li>
+    <li>
+      <h3>Article 8 </h3>
+      <p></p>
+    </li>
+    
+  </ul>
+{% endblock %}  
+
+{% block footer %} 
+
+{% endblock %}

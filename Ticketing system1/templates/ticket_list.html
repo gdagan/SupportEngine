@@ -1,31 +1,52 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Ticket List</title>
-</head>
-<body>
-  <h1>Ticket List</h1>
 
-  <table>
-    <thead>
-      <tr>
-        <th>Ticket ID</th>
-        <th>Status</th>
-        <th>Category</th>
-        <th>Priority</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>1</td>
-        <td>Open</td>
-        <td>Hardware</td>
-        <td>High</td>
-        <td><a href="ticket_details.html?id=1">View</a></td>
-      </tr>
-      <!-- Add more ticket rows as needed -->
-    </tbody>
+{% extends "layout.html" %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}"> 
+{% endblock %}
+
+{% block body %} 
+<h1>Ticket List</h1>
+
+username = {{ username }}
+<div>
+
+  {{ overalls | safe }}
+    <br>
+  
+<br>
+<br>
+      <table>
+  <tr>
+      <th>id</th>
+      <th>Category</th>
+      <th>Priority</th>
+      <th>Description</th>
+      <th>Status</th>
+      <th>Attachments</th>
+      <th>username</th>
+      <th></th>
+  </tr>
+    {% for ticket in tickets%}
+        <tr>
+        {% for item in ticket%}
+              <td>{{ item }} </td>
+        {% endfor %}
+        <td><a href="/view_ticket/{{ ticket[0] }}">View</a> </td>
+        <td><a href="/edit_ticket/{{ ticket[0] }}">Edit</a> </td>
+        
+        </tr>
+    {% endfor %}
   </table>
-</body>
-</html>
+</div>
+
+  <br>
+<br>
+<br>
+
+</div>
+{% endblock %}  
+
+{% block footer %} 
+
+{% endblock %}

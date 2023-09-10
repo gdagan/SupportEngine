@@ -6,28 +6,38 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">  
    
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  
 
-<div class="logo">
+<!-- <div class="logo">
     <img src="static/images/logo.png" alt="SupportEngine Logo"
     width="200" height="100" >
-</div>
+</div> -->
     
-  <div class="topnav">
-    <a class="active" href="main">Home</a>
-    <a href="technician_dashboard">Dashboard</a>
-    <a href="view_tickets">View Tickets</a>
-    <a href="kb_faq">Knowledge Base</a>
-    <a href="about">About Us</a>
-    <a href="contact_us">Contact Us</a>
-    <a href="technician_login">Login</a>
-  </div>
-        
+  <div class="sidebar">
+      <a href="main"><img src="\static\images\HD.png" alt="SupportEngine Logo"
+        width="200" height="100" ></a>
+      <a class="active" href="main"><i class="fa fa-pie-chart""></i>Dashboard</a>
+      <a href="/technician_dashboard"><i class="fa fa-fw fa-ticket"></i>Tickets</a>
+      <a href="/assets_management"><i class="fa fa-tachometer"></i>Asset Management</a>
+      <a href="/kb_faq"><i class="fa fa-fw fas fa-archive"></i>Knowledge Base</a>
+      <a href="/about"><i class="fa fa-fw fas fa-book"></i>About Us</a>
+      <a href="/contact_us"><i class="fa fa-fw fa-envelope"></i>Contact Us</a>
+      <a href="/submit_ticket"><i class="fa fa-ticket"></i>Create New Ticket</a>
+      {% if username!=''%}
+          <a href="/tech_logout" class="split"><i class="fa fa-fw fa-user"></i>Logout</a>
+      {% else %}
+          <a href="/tech_login" class="split"><i class="fa fa-fw fa-user"></i>Login</a>
+      {% endif %}
+     
           
   </div>
   {% block head %} {% endblock %}
 </head>
 <body>
+  <div class="content">
     {% block body %} {% endblock %}
+  </div>
 
 </body>
 <footer>

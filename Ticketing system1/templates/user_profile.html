@@ -1,29 +1,33 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>User Profile</title>
-</head>
-<body>
-  <h1>User Profile</h1>
+{% extends "layout.html" %}
 
-  <form action="update_profile" method="post">
-    <label for="name">Name:</label>
-    <input type="text" id="name" name="name" value="John Doe">
-    <br>
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}"> 
+{% endblock %}
 
-    <label for="email">Email:</label>
-    <input type="email" id="email" name="email" value="johndoe@example.com">
-    <br>
+{% block body %} 
+<h1>User Profile</h1>
 
-    <label for="phone">Phone:</label>
-    <input type="tel" id="phone" name="phone" value="1234567890">
-    <br>
+<form action="/update_profile" method="post">
+  <label for="name">Name:</label>
+  <input type="text" id="name" name="name" value="John Doe">
+  <br>
 
-    <label for="password">Password:</label>
-    <input type="password" id="password" name="password">
-    <br>
+  <label for="email">Email:</label>
+  <input type="email" id="email" name="email" value="johndoe@example.com">
+  <br>
 
-    <input type="submit" value="Update Profile">
-  </form>
-</body>
-</html>
+  <label for="phone">Phone:</label>
+  <input type="tel" id="phone" name="phone" value="1234567890">
+  <br>
+
+  <label for="password">Password:</label>
+  <input type="password" id="password" name="password">
+  <br>
+
+  <input type="submit" value="Update Profile">
+</form>
+{% endblock %}  
+
+{% block footer %} 
+
+{% endblock %}

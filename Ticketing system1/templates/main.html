@@ -1,33 +1,80 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>SupportEngine Ticketing System</title>
-  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+{% extends "layout.html" %}
+
+{% block head %}
+<title>SupportEngine Ticketing System</title>
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+{% endblock %}
+
+{% block body %} 
+<h1>Technician Dashboard</h1>
+  {{ overalls | safe }}
   
-</head>
-<body>
-  <div id="header">
-    <h1>SupportEngine Ticketing System</h1>
-  </div>
-    <!-- Top navigation -->
-  <div class="topnav">
-      <a class="active" href="main"><i class="fa fa-fw fa-home"></i>Home</a>
-      <a href="technician_dashboard"><i class="fa fa-tachometer"></i>Dashboard</a>
-      <a href="view_tickets"><i class="fa fa-ticket"></i>View Tickets</a>
-      <a href="kb_faq"><i class="fa fa-fw fas fa-archive"></i>Knowledge Base</a>
-      <a href="about"><i class="fa fa-fw fas fa-book"></i>About Us</a>
-      <a href="contact_us"><i class="fa fa-fw fa-envelope"></i>Contact Us</a>
-      <a href="technician_login" class="split"><i class="fa fa-fw fa-user"></i>Login</a>
-    </div>
-</body>
-<footer>
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-md-12">
-        <p>© 2023 SupportEngine Ticketing System. All Rights Reserved.</p>
-      </div>
-    </div>
-  </div>
-</footer>
-</html>
+<h2>Ticket Metrics</h2>
+  <table>
+      <thead>
+          <tr>
+              <th>id</th>
+              <th>Category</th>
+              <th>Priority</th>
+              <th>status</th>
+              <th>Open Tickets</th>
+          </tr>
+      </thead>
+      <tbody>
+          {% for ticket in tickets %}
+          <tr>
+              <td>{{ ticket.id }}</td>
+              <td>{{ ticket.category }}</td>
+              <td>{{ ticket.priority }}</td>
+              <td>{{ ticket.status }}</td>
+              <td>{{ ticket.open_tickets }}</td>
+          </tr>
+          {% endfor %}
+      </tbody>
+  </table>
+
+  <h2>Ticket Trends</h2>
+  <canvas id="ticketChart"></canvas>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+      var ctx = document.getElementById('ticketChart').getContext('2d');
+      var ticketChart = new Chart(ctx, {
+          type: 'pie',
+          data: {
+              labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+              datasets: [{
+                  label: 'Tickets Opened', 
+                  data: status_data === ticket_opened,
+                  backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                  borderColor: 'rgba(75, 192, 192, 1)',
+                  borderWidth: 3
+              }],
+          data: { 
+            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+            datasets: [{
+                label: 'Tickets closed', 
+                data: status_data === ticket_closed,
+                backgroundColor: 'red',
+                borderColor: 'black',
+                borderWidth: 3
+            }]
+          }
+          },
+          options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              scales: {
+                  y: {
+                      beginAtZero: true
+                  }
+              }
+          }
+      });
+  </script>
+{% endblock %}  
+
+{% block footer %} 
+
+{% endblock %}

@@ -1,6 +1,5 @@
 import sqlite3
 from sqlite3 import Error
-from tkinter import INSERT
 
 
 """ create a database connection to a SQLite database """
@@ -14,13 +13,16 @@ c.execute('''
                
     CREATE TABLE tickets (
         id INTEGER PRIMARY KEY,
-        category TEXT,
-        technician_name TEXT,
-        priority TEXT,
-        description TEXT,
-        status TEXT,
-        attachments TEXT,
-        comments TEXT)
+        Description TEXT,
+        RequesterName TEXT,
+        AssignedTo TEXT,
+        DueBy TEXT,
+        Category TEXT,
+        Priority TEXT,
+        CreatedDate TEXT,
+        Status TEXT,
+        Attachments TEXT,
+        Comments TEXT)
 ''')
 c.execute('''
     CREATE TABLE users (
@@ -121,11 +123,15 @@ c.execute('''
         password TEXT)
 ''')
 
-
+c.execute(''' 
+    CREATE TABLE contact_us(
+        fname TEXT,
+        lname TEXT,
+        department TEXT,
+        subject TEXT        
+    )
+''')
 
 # Commit the changes and close the database connection
 conn.commit()
 conn.close()
-
-
-

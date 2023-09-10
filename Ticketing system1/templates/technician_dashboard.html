@@ -1,64 +1,75 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Technician Dashboard</title>
-</head>
-<body>
-  <h1>Technician Dashboard</h1>
+{% extends "layout.html" %}
 
-  <div>
-    <h2>Tickets Assigned to You</h2>
-    <table>
-      <thead>
-        <tr>
-          <th>Ticket ID</th>
-          <th>Status</th>
-          <th>Category</th>
-          <th>Priority</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>1</td>
-          <td>Open</td>
-          <td>Hardware</td>
-          <td>High</td>
-        </tr>
-        <!-- Add more ticket rows as needed -->
-      </tbody>
-    </table>
+{% block head %}
+ <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+
+{% endblock %}
+
+{% block body %} 
+
+<h1>Technician Dashboard</h1>
+
+
+<form method = 'POST' id="Ticketlist" style="height: 100px; width: 100px">
+<label for="TicketList">Ticket List:</label>
+<select id="TicketList" name="TicketList" >
+  <option value="AllTickets">All Tickets</option>
+  <option value="MyTickets">My Tickets</option>
+</select>
+<br>
+<br>
+<button type="submit" id="submitButton">Submit</button>
+
+</form>
+
+<div>
+<table>
+   <th> {{ overalls}}</th>
+      <br>
+      
+</table>
+
+  <br>
+  <br>
+<table>
+    <tr>
+      <th>id</th>
+      <th>Description</th>
+      <th>Requester Name</th>
+      <th>Assigned to</th>
+      <th>Due by</th>
+      <th>Category</th>
+      <th>Priority</th>
+      <th>Created date</th>
+      <th>Status</th>
+      <th>Attachments</th>
+      <th>Site</th>
+      <th>Actions</th>
+      <th></th>
+    </tr>
+      {% for ticket in tickets%}
+          <tr>
+          {% for item in ticket%}
+                <td>{{ item }} </td>
+          {% endfor %}
+          <td><a href="view_ticket/{{ ticket[0] }}">View</a> </td>
+          <td><a href="edit_ticket/{{ ticket[0] }}">Edit</a> </td>
+          
+          </tr>
+      {% endfor %}
+</table>
   </div>
 
-  <div>
-    <h2>Tickets by Status</h2>
-    <table>
-      <thead>
-        <tr>
-          <th>Status</th>
-          <th>Total Tickets</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Open</td>
-          <td>10</td>
-        </tr>
-        <tr>
-          <td>In Progress</td>
-          <td>5</td>
-        </tr>
-        <!-- Add more status rows as needed -->
-      </tbody>
-    </table>
-  </div>
-</body>
-<footer>
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-md-12">
-        <p>© 2023 SupportEngine Ticketing System. All Rights Reserved.</p>
-      </div>
-    </div>
-  </div>
-</footer>
-</html>
+    <br>
+  <br>
+  <br>
+
+</div>
+
+  {% endblock %}  
+
+
+{% block footer %} 
+
+{% endblock %}
+

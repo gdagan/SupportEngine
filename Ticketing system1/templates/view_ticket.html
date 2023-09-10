@@ -1,0 +1,68 @@
+{% extends "layout.html" %}
+
+{% block head %}
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1>Ticket Details</h1>
+    
+    <!-- Display Ticket Information -->
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Description</th>
+                <th>Requester Name</th>
+                <th>Assigned To</th>
+                <th>Due By</th>
+                <th>Category</th>
+                <th>Priority</th>
+                <th>Created Date</th>
+                <th>Status</th>
+                <th>Attachments</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+              {% for ticket in tickets %}
+                {% for item in ticket %}
+                  <td>{{ item }}</td>
+                {% endfor %}
+              {% endfor %}
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Display Comments -->
+   
+    <ul class="list-group">
+        {% for comment in comments %}
+        <li class="list-group-item">
+            <div class="comment-header">
+                <strong>{{ comment[1] }}</strong> on {{ comment[3] }} at {{ comment[4] }}
+            </div>
+            <div class="comment-text">{{ comment[2] }}</div>
+        </li>
+        {% endfor %}
+    </ul>
+
+    <!-- Add Comment Form -->
+    <h2>Add a Comment</h2>
+    <form method="POST">
+        <div class="form-group">
+            <label for="comment">Comment:</label>
+            <textarea class="form-control" id="comment" name="comment" rows="4" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit Comment</button>
+    </form>
+</div>
+{% endblock %}
+
+{% block footer %}
+
+{% endblock %}
