@@ -6,51 +6,78 @@
 
 {% block body %} 
 <h1>Edit Ticket</h1>
-<form action="/edit_ticket" method="post">
+<form  method="post">
 
   <label for="ticket_id"> ID:</label>
-  <input type="text" id="ticket_id" name="ticket_id" value="1" readonly>
+  <p>{{ context['ticket'][0][0] }}</p>
   <br>
   <br>
 
   <label for="category">Category:</label>
   <select id="category" name="category">
-    <option value="Hardware">Hardware</option>
-    <option value="Software">Software</option>
-    <option value="Network">Network</option>
+    {% for category in context['options_cat'] %}
+    {%if category[0] == context['ticket'][0][5] %}
+      <option value={{category[0]}} selected>{{category[0]}}</option>
+      {% else %}
+    <option value={{category[0]}}>{{category[0]}}</option>
+    {%endif%}
+    {% endfor %}
   </select>
 
   <br>
   <br>
   <label for="priority">Priority:</label>
   <select id="priority" name="priority">
-    <option value="Low">Low</option>
-    <option value="Medium">Medium</option>
-    <option value="High">High</option>
-    <option value="Urgent">Urgent</option>
+    {% for priority in context['options_pri'] %}
+    {%if priority == context['ticket'][0][6] %}
+      <option value={{priority}} selected>{{priority}}</option>
+      {% else %}
+     <option value={{priority}}>{{priority}}</option>
+     {%endif%}
+    {% endfor %}
   </select>
   <br>
   <br>
 
   <label for="description">Description:</label>
-  <textarea id="description" name="description" rows="10" cols="50">Issue with the ticket</textarea>
+  <textarea id="description" name="description" rows="4" cols="50" required>{{ context['ticket'][0][1] }}</textarea>
   <br>
-  <br>
+
 
   <label for="status">Status:</label>
   <select id="status" name="status">
-    <option value="Open">Open</option>
-    <option value="In Progress">In Progress</option>
-    <option value="Closed">Closed</option>
+    {% for status in context['options_status'] %}
+    {%if status == context['ticket'][0][8] %}
+      <option value={{status}} selected>{{status}}</option>
+      {% else %}
+      <option value={{status}}>{{status}}</option>
+      {%endif%}
+    {% endfor %}
   </select>
   <br>
-  
+  <br>
+  <br>
+     <label for="AssignedTO">AssignedTO</label>
+     <select id="AssignedTO" name="AssignedTO">
+      {% for user in context['options_users'] %}
+        {% if user[0] == context['ticket'][0][3] %}
+        <option value={{user[0]}} selected>{{user[0]}}</option>
+        {% else %}
+          <option value={{user[0]}}>{{user[0]}}</option>
+        {% endif %}
+      
+      {% endfor %}
+    </select>
+    
+    
+    
+  <br>
   <br>
   <br>
   <br>
   <br>
   <button type="submit" value="Update_Ticket" >Update Ticket</button>
-  <button type="submit" value="cancel" >Cancel</button>
+  <!-- <button type="submit" value="cancel" >Cancel</button> -->
 </form>
 <script>
   document.getElementById('ticketForm').addEventListener('submit', function (event) {

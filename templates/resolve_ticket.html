@@ -1,0 +1,75 @@
+{% extends "layout.html" %}
+
+{% block head %}
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}">
+{% endblock %}
+
+{% block body %}
+  <h1>Resolved Ticket</h1>
+
+  <div class="ticket-details">
+    <h2>Ticket Details</h2>
+    <table>
+      <tr>
+        <th>ID:</th>
+        <td>{{ ticket.id }}</td>
+      </tr>
+      <tr>
+        <th>Description:</th>
+        <td>{{ ticket.desc }}</td>
+      </tr>
+      <tr>
+        <th>Requested By:</th>
+        <td>{{ ticket.reqName }}</td>
+      </tr>
+      <tr>
+        <th>Assigned To:</th>
+        <td>{{ ticket.assto }}</td>
+      </tr>
+      <tr>
+        <th>Date Created:</th>
+        <td>{{ ticket.dby }}</td>
+      </tr>
+      <tr>
+        <th>Category:</th>
+        <td>{{ ticket.cat }}</td>
+      </tr>
+      <tr>
+        <th>Priority:</th>
+        <td>{{ ticket.pri }}</td>
+      </tr>
+      <tr>
+        <th>Created By:</th>
+        <td>{{ ticket.cby }}</td>
+      </tr>
+      <tr>
+        <th>Status:</th>
+        <td>{{ ticket.stat }}</td>
+      </tr>
+      <tr>
+        <th>Attachments:</th>
+        <td>{{ ticket.attach }}</td>
+      </tr>
+      <tr>
+        <th>Actions:</th>
+        <td>{{ ticket.act }}</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="comments">
+    <h2>Comments</h2>
+    <ul>
+      {% for comment in comments %}
+        <li>
+          <strong>{{ comment.author }}</strong> ({{ comment.date }} {{ comment.time }}):
+          {{ comment.text }}
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+
+  <div class="back-button">
+    <a href="/technician_dashboard">Back to Dashboard</a>
+  </div>
+{% endblock %}

@@ -2,60 +2,116 @@
 
 {% block head %}
  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+ <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/brands.min.js"></script>
 
 {% endblock %}
 
 {% block body %} 
+<!-- Display the username in the top-right corner -->
+<div class="top-right">
+ 
+  <p> Welcome, <strong>{{ username }}</p> </strong>
+ 
+</div>
+
+<div class="content" style="margin-left: 20px; margin-right: 20px; height:fit-content">
+
 
 <h1>Technician Dashboard</h1>
-<table> 
-  <th>username = {{ username}}</th>
-</table>
+
+<form method = 'POST' id="Ticketlist" >
+<label for="TicketList">Tickets List:</label>
+<select id="TicketList" name="TicketList" style="height: 20px; width: 200px; ">
+  {% for option in ticket_filtering['options'] %}
+  {%if option == ticket_filtering['selected']%}
+    <option value={{option}} selected>{{option}}</option>
+    {% else %}
+  <option value={{option}}>{{option}}</option>
+  {%endif%}
+  {% endfor %}
+</select>
+<br>
+<br>
+<button type="submit" id="submitButton" style="width: 200px">Submit</button>
+
+</form>
 
 <div>
 <table>
-   <th> {{ overalls | safe }}</th>
+   <th> {{ overalls}}</th>
       <br>
+      
 </table>
-
+</div>
   <br>
   <br>
 <table>
-    <tr>
-      <th>id</th>
-      <th>Description</th>
-      <th>Requester Name</th>
-      <th>Assigned to</th>
-      <th>Due by</th>
-      <th>Category</th>
-      <th>Priority</th>
-      <th>Created date</th>
-      <th>Status</th>
-      <th>Attachments</th>
-      <th>Site</th>
-      <th>Actions</th>
-      <th></th>
-    </tr>
-      {% for ticket in tickets%}
+  <tr>
+    <th data-sort="asc">ID <i class="fa fa-sort"></i></th>
+    <th data-sort="asc">Description <i class="fa fa-sort"></i></th>
+    <th data-sort="asc">Requester Name <i class="fa fa-sort"></i></th>
+    <th data-sort="asc">Assigned To <i class="fa fa-sort"></i></th>
+    <th data-sort="asc">Due By <i class="fa fa-sort"></i></th>
+    <th data-sort="asc">Category <i class="fa fa-sort"></i></th>
+    <th data-sort="asc">Priority <i class="fa fa-sort"></i></th>
+    <th data-sort="asc">Created Date <i class="fa fa-sort"></i></th>
+    <th data-sort="asc">Status <i class="fa fa-sort"></i></th>
+    <th data-sort="asc">Attachments <i class="fa fa-sort"></i></th>
+    <th data-sort="asc">Department <i class="fa fa-sort"></i></th>
+    <th data-sort="asc">Resolved Date <i class="fa fa-sort"></i></th>
+    <th data-sort="asc">Action <i class="fa fa-sort"></i></th>
+    <th></th>
+    <th></th>
+  </tr>
+   {% for ticket in tickets%}
           <tr>
           {% for item in ticket%}
                 <td>{{ item }} </td>
           {% endfor %}
           <td><a href="view_ticket/{{ ticket[0] }}">View</a> </td>
           <td><a href="edit_ticket/{{ ticket[0] }}">Edit</a> </td>
-          
+          <td><a href="resolve_ticket/{{ ticket[0] }}">Resolve</a> </td>         
           </tr>
-      {% endfor %}
+   {% endfor %}
 </table>
-  </div>
-
-    <br>
-  <br>
-  <br>
-
+</div>
 </div>
 
+
+<script>
+  $(document).ready(function() {
+      // Sort table when a table header is clicked
+      $('th').click(function() {
+          var table = $(this).parents('table').eq(0);
+          var rows = table.find('tr:gt(0)').toArray().sort(comparator($(this).index()));
+          this.asc = !this.asc;
+          if (!this.asc) { rows = rows.reverse(); }
+          for (var i = 0; i < rows.length; i++) { table.append(rows[i]); }
+      });
+
+      // Comparator function for sorting
+      function comparator(index) {
+          return function(a, b) {
+              var valA = getCellValue(a, index);
+              var valB = getCellValue(b, index);
+              return $.isNumeric(valA) && $.isNumeric(valB) ? valA - valB : valA.toString().localeCompare(valB);
+          };
+      }
+
+      // Get cell value for sorting
+      function getCellValue(row, index) {
+          return $(row).children('td').eq(index).text();
+      }
+  });
+</script>
+
+
+
   {% endblock %}  
+
 
 {% block footer %} 
 

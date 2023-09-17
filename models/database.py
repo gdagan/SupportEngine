@@ -22,6 +22,7 @@ c.execute('''
         CreatedDate TEXT,
         Status TEXT,
         Attachments TEXT,
+        department TEXT,
         Comments TEXT)
 ''')
 c.execute('''

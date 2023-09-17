@@ -1,0 +1,80 @@
+{% extends "layout.html" %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}"> 
+
+
+{% endblock %}
+
+{% block body %} 
+
+<h1>Asset Management</h1>
+
+<!-- Form to add new assets -->
+<form method="POST">
+    <label for="asset_name">Asset Name:</label>
+    <input type="text" id="asset_name" name="asset_name" required><br>
+
+    <label for="asset_tag">Asset Tag:</label>
+    <input type="text" id="asset_tag" name="asset_tag" required><br>
+
+    <label for="type">Type:</label>
+    <select id="type" name="asset_type">
+      <option value="Laptop">Laptop</option>
+      <option value="Desktop">Desktop</option>
+      <option value="Telephony">Telephony</option>
+      <option value="Accessories">Accessories</option>
+    </select> <br><br>
+
+    <label for="location">Location:</label>
+    <select id="location" name="location">
+      <option value="hr">HR</option>
+      <option value="it">IT</option>
+      <option value="marketing">Marketing</option>
+      <option value="finance">Finance</option>
+    </select> <br><br>
+
+    <label for="model">Model:</label>
+    <input type="text" id="model" name="model" required><br>
+
+    <br>
+    <br>
+
+    <button type="submit" id="submitButton" style="width: 200px">Submit</button>
+</form>
+
+<!-- Asset Table -->
+<h2>Asset List</h2>
+<table border="1">
+    <thead>
+        <tr>
+            <th>Asset Name</th>
+            <th>Location</th>
+            <th>Asset Type</th>
+            <th>Asset Tag</th>
+            <th>Model</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for asset in asset_management %}
+            <tr>
+                <td>{{ asset[1] }}</td>
+                <td>{{ asset[2] }}</td>
+                <td>{{ asset[3] }}</td>
+                <td>{{ asset[4] }}</td>
+                <td>{{ asset[5] }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+
+
+
+
+{% endblock %}  
+
+{% block footer %} 
+
+{% endblock %}

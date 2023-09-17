@@ -5,21 +5,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">  
    
-<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.0/main.css" rel="stylesheet" />
+
+
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.0/main.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   
 
-<!-- <div class="logo">
-    <img src="static/images/logo.png" alt="SupportEngine Logo"
-    width="200" height="100" >
-</div> -->
-    
+  <title>SupportEngine</title>   
   <div class="sidebar">
-      <a href="main"><img src="static/images/logo.png" alt="SupportEngine Logo"
+      <a href="main"><img src="\static\images\HD.png" alt="SupportEngine Logo"
         width="200" height="100" ></a>
       <a class="active" href="main"><i class="fa fa-pie-chart""></i>Dashboard</a>
       <a href="/technician_dashboard"><i class="fa fa-fw fa-ticket"></i>Tickets</a>
-      <a href="/assets_management"><i class="fa fa-tachometer"></i>Asset Management</a>
+      <a href="/add_asset"><i class="fa fa-fw fa-wrench"></i>Add a new asset</a>
+      <a href="/ticket_report"><i class="fa fa-fw fa-bar-chart"></i>Ticket Report</a>
       <a href="/kb_faq"><i class="fa fa-fw fas fa-archive"></i>Knowledge Base</a>
       <a href="/about"><i class="fa fa-fw fas fa-book"></i>About Us</a>
       <a href="/contact_us"><i class="fa fa-fw fa-envelope"></i>Contact Us</a>
@@ -30,9 +33,26 @@
           <a href="/tech_login" class="split"><i class="fa fa-fw fa-user"></i>Login</a>
       {% endif %}
      
-          
+      <!----calendar container-->
+      <div id="calendar" width="200" height="100"></div>
+
   </div>
-  {% block head %} {% endblock %}
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var calendarEl = document.getElementById('calendar');
+
+      var calendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: 'dayGridMonth'
+      });
+
+      calendar.render();
+    });
+  </script>
+
+  
+
+{% block head %} {% endblock %}
 </head>
 <body>
   <div class="content">

@@ -7,109 +7,122 @@
 {% block body %} 
 <h1>Welcome to the User Portal</h1>
 <h2>Submit a Ticket</h2>
-<div>
+<div class="container-fluid">
+  <div class="row">
+      <div class="col-md-12">
+        <h1>Add a new Ticket</h1>
+      </div>
+  </div>
   <form id="ticketForm">
-    <div class="row">
-      <div class="col-25">
-        <label for="fname">First Name</label>
-      </div>
-      <div class="col-75">
-        <input type="text" id="fname" name="firstname"  style="margin:auto;max-width:500px" placeholder="Your name...">
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-25">
-        <label for="lname">Last Name</label>
-      </div>
-      <div class="col-75">
-        <input type="text" id="lname" name="lastname" style="margin:auto;max-width:500px" placeholder="Your last name...">
-      </div>
-      <div class="row">
-        <div class="col-25">
-          <label for="email">Email</label>
-        </div>
-        <div class="col-75">
-          <input type="text" id="email" name="email" style="margin:auto;max-width:500px" placeholder="Your email address...">
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-25">
-        <label for="Department">Department</label>
-      </div>
-      <div class="col-75" >
-        <select id="Department" name="Department">
-          <option value="Finance">Finance</option>
-          <option value="Marketing">Marketing</option>
-          <option value="Admin">Admin</option>
-          <option value="Security">Security</option>
-          <option value="R&D">R&D</option>
-          <option value="Press Office">Press office</option>
-          <option value="Social Care">Social Care</option>
-          <option value="Consulting">Consulting</option>
-        </select>
-      </div>
-    </div>
-    <label for="category">Category:</label>
-    <select id="category">
-      <option value="Software">software</option>
-      <option value="Hardware">hardware</option>
-      <option value="Email">Email</option>
-      <option value="Network">Network</option>
-      <option value="Fob Access">Fob Access</option>
-    </select><br>
+  <label for="name">Name:</label>
+  <input type="text" id="name" name="name" required><br><br>
 
-    <label for="priority">Priority:</label>
-    <select id="priority">
-      <option value="low">Low</option>
-      <option value="medium">Medium</option>
-      <option value="high">High</option>
-    </select><br>
+  <label for="email">Email:</label>
+  <input type="email" id="email" name="email" required><br><br>
 
-    <label for="description">Description:</label>
-    <textarea id="description" style="margin:auto;max-width:500px" rows="4" required></textarea><br>
+  <label for="department">Department:</label>
+  <select id="department" name="department" required>
+    <option value="hr">HR</option>
+    <option value="marketing">Marketing</option>
+    <option value="it">IT</option>
+    <option value="consulting">Consulting</option>
+    <option value="development">Development</option>
+    <option value="Sscurity">Security</option>
+    <option value="finance">Finance</option>
+    <option value="pressoffice">Press Office</option>
+    <option value="facility">Facility</option>
+  </select><br><br>
 
-    <label for="attachment">Attachment:</label>
-    <input type="file" id="attachment"><br>
+  <label for="category">Category:</label>
+  <select id="category" name="category" required>
+    <option value="software">Software</option>
+    <option value="hardware">Hardware</option>
+    <option value="network">Network</option>
+  </select><br><br>
 
-    <button type="submit">Submit Ticket</button>
+  <label for="priority">priority:</label>
+  <select id="priority" name="priority" required>
+    <option value="low">Low</option>
+    <option value="medium">Medium</option>
+    <option value="high">High</option>
+    <option value="critical">Critical</option>
+  </select><br><br>
+
+  <label for="description">Description:</label><br>
+  <textarea id="description" name="description" rows="4" cols="50" required></textarea><br><br>
+
+  <label for="attachment">Attachments:</label>
+  <input type="file" id="attachment" name="attachment" accept=".jpg, .jpeg, .png, .pdf"><br><br>
+
+      <button type="submit" id="submitButton">Submit</button>
   </form>
 </div>
-<script src="user_portal.js"></script>
+
+<script>
+document.getElementById('ticketForm').addEventListener('submit', function (event) {
+    event.preventDefault(); // Prevent the default form submission
+
+    // Gather form data using FormData
+    const formData = new FormData(document.getElementById('ticketForm'));
+
+    // Send form data using fetch
+    fetch('/submit_ticket', {
+        method: 'POST',
+        body: formData // Use formData directly
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.status === true) {
+            alert('Ticket submitted successfully');
+            window.location.href = '/user_dashboard';
+        } else {
+            alert('Ticket submission failed');
+        }
+      
+        console.log(data.message); // Message from the server
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+});
+
+</script>
+
+</table>
 
 
 <h2>Recent Tickets</h2>
 
-<table>
-  <thead>
-    <tr>
-      <th>Ticket ID</th>
-      <th>Category</th>
-      <th>Priority</th>
-      <th>Status</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>TCK-123</td>
-      <td>Hardware</td>
-      <td>High</td>
-      <td>Open</td>
-    </tr>
-    <tr>
-      <td>TCK-124</td>
-      <td>Software</td>
-      <td>Medium</td>
-      <td>In Progress</td>
-    </tr>
-    <tr>
-      <td>TCK-125</td>
-      <td>Network</td>
-      <td>Low</td>
-      <td>Closed</td>
-    </tr>
-  </tbody>
-</table>
+<table border="1">
+    <thead>
+      <tr>
+        <th data-sort="asc">ID <i class="fa fa-sort"></i></th>
+        <th data-sort="asc">Description <i class="fa fa-sort"></i></th>
+        <th data-sort="asc">Requester Name <i class="fa fa-sort"></i></th>
+        <th data-sort="asc">Assigned To <i class="fa fa-sort"></i></th>
+        <th data-sort="asc">Due By <i class="fa fa-sort"></i></th>
+        <th data-sort="asc">Category <i class="fa fa-sort"></i></th>
+        <th data-sort="asc">Priority <i class="fa fa-sort"></i></th>
+        <th data-sort="asc">Created Date <i class="fa fa-sort"></i></th>
+        <th data-sort="asc">Status <i class="fa fa-sort"></i></th>
+        <th data-sort="asc">Attachments <i class="fa fa-sort"></i></th>
+        <th data-sort="asc">Department <i class="fa fa-sort"></i></th>
+        <th data-sort="asc">Resolved Date <i class="fa fa-sort"></i></th>
+       
+      </tr>
+    </thead>
+    <tbody>
+        {% for ticket in tickets %}
+            <tr>
+                <td>{{ ticket[0] }}</td>
+                <td>{{ ticket[1] }}</td>
+                <td>{{ ticket[2] }}</td>
+                <td>{{ ticket[3] }}</td>
+                <td>{{ ticket[4] }}</td>
+                <td>{{ ticket[5] }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
 {% endblock %}  
 
 {% block footer %} 

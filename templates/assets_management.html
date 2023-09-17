@@ -8,76 +8,64 @@
 <h1>Asset Management</h1>
 
 <h2>Add Asset</h2>
-<form action="/assets_management" method="post">
-
+<form  method="POST" id="assetform">
   <label for="asset_name">Asset Name:</label>
-  <input type="text" id="asset_name" name="asset_name"> <br>
-  <br>
+  <input type="text" id="asset_name" name="asset_name"> <br><br>
 
   <label for="asset_tag">Asset Tag:</label>
-  <input type="text" id="asset_tag" name="asset_tag"> <br>
-  <br>
+  <input type="text" id="asset_tag" name="asset_tag"> <br><br>
 
   <label for="type">Type:</label>
-  <select id="type" name="type">
+  <select id="type" name="asset_type">
     <option value="Laptop">Laptop</option>
     <option value="Desktop">Desktop</option>
     <option value="Telephony">Telephony</option>
     <option value="Accessories">Accessories</option>
-  </select> <br>
-  <br>
+  </select> <br><br>
 
- <label for="location">Location:</label>
+  <label for="location">Location:</label>
   <select id="location" name="location">
     <option value="hr">HR</option>
     <option value="it">IT</option>
     <option value="marketing">Marketing</option>
     <option value="finance">Finance</option>
-  </select> <br>
-  <br>
+  </select> <br><br>
 
   <label for="model">Model:</label>
   <input type="text" id="model" name="model">
-  <br>
-  <br>
+  <br><br>
 
-  <input type="submit" value="Add Asset">
+  <button type="submit" id="submitButton">Submit</button>
 </form>
-{{ asset_management}}
-<h2>Assets Table</h2>
-<table>
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>Asset Name</th>
-      <th>Location</th>
-      <th>Type</th>
-      <th>Asset Tag</th>
-      <th>Model</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      {% for assets in asset_management %}
-      <tr>
-      {% for item in assets %}
-            <td>{{ item }} </td>
-      {% endfor %}
-    
-      <td>
-        <a href="/edit_asset">Edit</a> 
-        <a href="/delete_asset">Delete</a>
-      </td>
-      {% endfor %}
-    </tr>
-    <!-- Add more asset rows as needed -->
-  </tbody>
-</table>
-
 
 {% endblock %}  
+<script>
+  document.getElementById('assetForm').addEventListener('submit', function (event) {
+    event.preventDefault(); // Prevent the default form submission
+    
+    // Gather form data using FormData
+    const formData = new FormData(document.getElementById('assetForm'));
+
+    // Send form data using fetch
+    fetch('/asset_management', {
+      method: 'POST',
+      body: formData // Use formData directly
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.status === true) {
+        alert('Asset added successfully');
+        // Optionally, you can redirect to a success page here
+      } else {
+        alert('Failed to add asset');
+      }
+      console.log(data.message); // Message from the server
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+  });
+</script>
 
 {% block footer %} 
-
 {% endblock %}

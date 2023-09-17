@@ -1,78 +1,108 @@
 {% extends "layout.html" %}
 
 {% block head %}
-<title>SupportEngine Ticketing System</title>
-<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}"> 
 
 {% endblock %}
 
 {% block body %} 
-<h1>Technician Dashboard</h1>
-  {{ overalls | safe }}
-  
-<h2>Ticket Metrics</h2>
-  <table>
-      <thead>
-          <tr>
-              <th>id</th>
-              <th>Category</th>
-              <th>Priority</th>
-              <th>status</th>
-              <th>Open Tickets</th>
-          </tr>
-      </thead>
-      <tbody>
-          {% for ticket in tickets %}
-          <tr>
-              <td>{{ ticket.id }}</td>
-              <td>{{ ticket.category }}</td>
-              <td>{{ ticket.priority }}</td>
-              <td>{{ ticket.status }}</td>
-              <td>{{ ticket.open_tickets }}</td>
-          </tr>
-          {% endfor %}
-      </tbody>
-  </table>
+<h1>Ticket Dashboard</h1>
 
-  <h2>Ticket Trends</h2>
-  <canvas id="ticketChart"></canvas>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script>
-      var ctx = document.getElementById('ticketChart').getContext('2d');
-      var ticketChart = new Chart(ctx, {
-          type: 'pie',
-          data: {
-              labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
-              datasets: [{
-                  label: 'Tickets Opened', 
-                  data: status_data === ticket_opened,
-                  backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                  borderColor: 'rgba(75, 192, 192, 1)',
-                  borderWidth: 3
-              }],
-          data: { 
-            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
-            datasets: [{
-                label: 'Tickets closed', 
-                data: status_data === ticket_closed,
-                backgroundColor: 'red',
-                borderColor: 'black',
-                borderWidth: 3
-            }]
-          }
-          },
-          options: {
-              responsive: true,
-              maintainAspectRatio: false,
-              scales: {
-                  y: {
-                      beginAtZero: true
-                  }
-              }
-          }
-      });
-  </script>
+<h2>Requests by Technician</h2>
+<table border="1">
+    <thead>
+        <tr>
+            <th>Technician</th>
+            <th>Request Count</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for technician in requests_by_technician %}
+            <tr>
+                <td>{{ technician[0] }}</td>
+                <td>{{ technician[1] }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<div id="chart_div">
+    <img src="static/stats/requests_by_technician.png" alt="Technician Chart">
+
+</div>
+
+<h2>Tickets by Status</h2>
+<table border="1">
+    <thead>
+        <tr>
+            <th>Status</th>
+            <th>Ticket Count</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for status in tickets_by_status %}
+            <tr>
+                <td>{{ status[0] }}</td>
+                <td>{{ status[1] }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<div id="chart_div">
+    <img src="static/stats/tickets_by_status.png" alt="tickets_by_status">
+
+</div>
+
+<h2>Tickets by Priority</h2>
+<table border="1">
+    <thead>
+        <tr>
+            <th>Priority</th>
+            <th>Ticket Count</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for priority in tickets_by_priority %}
+            <tr>
+                <td>{{ priority[0] }}</td>
+                <td>{{ priority[1] }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+
+</table>
+
+<div id="chart_div">
+    <img src="static/stats/tickets_by_priority.png" alt="tickets_by_priority">
+
+</div>
+
+
+<h2> Tickets by Category</h2>
+<table border="1">
+    <thead>
+        <tr>
+            <th>Category</th>
+            <th>Ticket Count</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for category in tickets_by_category %}
+            <tr>
+                <td>{{ category[0] }}</td>
+                <td>{{ category[1] }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+
+</table>
+<div id="chart_div">
+    <img src="static/stats/tickets_by_category.png" alt="tickets_by_category">
+
+</div>
+
+
+
 {% endblock %}  
 
 {% block footer %} 
