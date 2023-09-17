@@ -1,0 +1,53 @@
+{% extends "layout.html" %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+{% endblock %}
+
+{% block body %} 
+<h1>Knowledge Base / FAQ</h1>
+
+  <form action="#" method="get">
+    <input type="text" placeholder="Search.." name="search" style="margin:auto;max-width:500px">
+    <button type="submit"><i class="fa fa-search"></i></button>
+  </form>
+
+  <h2>Categories</h2>
+  <ul>
+    <li><a href="#category1">Category 1</a></li>
+    <li><a href="#category2">Category 2</a></li>
+    <li><a href="#category3">Category 3</a></li>
+    <li><a href="#category4">Category 4</a></li>
+    <!-- Add more category links as needed -->
+  </ul>
+
+  <h2 id="category1">Category 1</h2>
+  <ul>
+    <li>
+      <h3>Question 1</h3>
+      <p>Answer to Question 1 Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+    </li>
+    <li>
+      <h3>Question 2</h3>
+      <p>Answer to Question 2 Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+    </li>
+    <!-- Add more questions and answers within the category -->
+  </ul>
+
+  <h2 id="category2">Category 2</h2>
+  <ul>
+    <li>
+      <h3>Question 3</h3>
+      <p>Answer to Question 3 Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+    </li>
+    <li>
+      <h3>Question 4</h3>
+      <p>Answer to Question 4 Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+    </li>
+    <!-- Add more questions and answers within the category -->
+  </ul>
+{% endblock %}  
+
+{% block footer %} 
+
+{% endblock %}

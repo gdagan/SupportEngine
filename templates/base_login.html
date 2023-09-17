@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">  
+   
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/login.css') }}">  
+{% block head %} {% endblock %}
+</head>
+<body>
+    {% block body %} {% endblock %}
+
+</body>
+<footer>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <p>© 2023 SupportEngine Ticketing System. All Rights Reserved.</p>
+          {% block footer %} {% endblock %}
+        </div>
+      </div>
+    </div>
+  </footer>
+</html>
+

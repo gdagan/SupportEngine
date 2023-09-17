@@ -1,0 +1,89 @@
+{% extends "layout.html" %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}"> 
+{% endblock %}
+
+{% block body %} 
+<h1>Ticket Details</h1>
+
+<td>{{ comments | safe }}</td>
+<br>
+<br>
+<br>
+<table border="1">
+  <tbody>
+    {% for ticket in tickets %}
+      <tr>
+        {{ ticket | safe }}             
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+<br>
+<br>
+<div id="commentsContainer">
+  <h2>Comments:</h2>
+  <ul id="commentsList">
+    {% for comment in comments %}
+      <li>{{ comment.comment_text | safe }} </li>
+      <li>({{ comment.date }}</li> 
+      <li>{{ comment.time }})</li>
+
+    {% endfor %}
+  </ul>
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<form method="POST">
+  <div class="form-group">
+    <label for="comment">Comment</label>
+    <textarea id="comment" name="comment" placeholder="Write your tickets update comemnt ....." style="height:200px" required></textarea>
+  </div>
+  <input type="submit" value="Submit">
+</form>
+<script>
+  const commentForm = document.getElementById("commentForm");
+  const commentsTable = document.getElementById("commentsTable");
+
+  commentForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    const text = document.getElementById("comment").value;
+
+    if (text.trim() === "") {
+      alert("Please enter a comment.");
+      return;
+    }
+
+    try {
+      const response = await fetch(document.location.href, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: new URLSearchParams({
+          comment: text,
+          
+        }),
+      });
+
+      const data = await response.text();
+      // Update the comments table with the new comment row
+      commentsTable.innerHTML += data;
+      document.getElementById("comment").value = ""; // Clear the comment input
+    } catch (error) {
+      console.error("Error adding comment:", error);
+      alert("An error occurred while adding the comment.");
+    }
+  });
+</script>
+{% endblock %}  
+
+{% block footer %} 
+
+{% endblock %}

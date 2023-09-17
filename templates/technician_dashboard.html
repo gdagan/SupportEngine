@@ -1,0 +1,63 @@
+{% extends "layout.html" %}
+
+{% block head %}
+ <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+
+{% endblock %}
+
+{% block body %} 
+
+<h1>Technician Dashboard</h1>
+<table> 
+  <th>username = {{ username}}</th>
+</table>
+
+<div>
+<table>
+   <th> {{ overalls | safe }}</th>
+      <br>
+</table>
+
+  <br>
+  <br>
+<table>
+    <tr>
+      <th>id</th>
+      <th>Description</th>
+      <th>Requester Name</th>
+      <th>Assigned to</th>
+      <th>Due by</th>
+      <th>Category</th>
+      <th>Priority</th>
+      <th>Created date</th>
+      <th>Status</th>
+      <th>Attachments</th>
+      <th>Site</th>
+      <th>Actions</th>
+      <th></th>
+    </tr>
+      {% for ticket in tickets%}
+          <tr>
+          {% for item in ticket%}
+                <td>{{ item }} </td>
+          {% endfor %}
+          <td><a href="view_ticket/{{ ticket[0] }}">View</a> </td>
+          <td><a href="edit_ticket/{{ ticket[0] }}">Edit</a> </td>
+          
+          </tr>
+      {% endfor %}
+</table>
+  </div>
+
+    <br>
+  <br>
+  <br>
+
+</div>
+
+  {% endblock %}  
+
+{% block footer %} 
+
+{% endblock %}
+

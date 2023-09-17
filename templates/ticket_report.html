@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}"> 
+
+{% endblock %}
+
+{% block body %} 
+<h1>Reports and Analytics</h1>
+
+<h2>Ticket Metrics</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Category</th>
+      <th>Total Tickets</th>
+      <th>Average Resolution Time</th>
+      <th>Open Tickets</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for ticket in tickets%}
+          <tr>
+          {% for item in ticket%}
+                <td>{{ item }} </td>
+          {% endfor %}
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<h2>Ticket Trends</h2>
+<canvas id="ticketChart"></canvas>
+
+{% endblock %}  
+
+{% block footer %} 
+
+{% endblock %}

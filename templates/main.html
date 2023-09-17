@@ -1,0 +1,80 @@
+{% extends "layout.html" %}
+
+{% block head %}
+<title>SupportEngine Ticketing System</title>
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+{% endblock %}
+
+{% block body %} 
+<h1>Technician Dashboard</h1>
+  {{ overalls | safe }}
+  
+<h2>Ticket Metrics</h2>
+  <table>
+      <thead>
+          <tr>
+              <th>id</th>
+              <th>Category</th>
+              <th>Priority</th>
+              <th>status</th>
+              <th>Open Tickets</th>
+          </tr>
+      </thead>
+      <tbody>
+          {% for ticket in tickets %}
+          <tr>
+              <td>{{ ticket.id }}</td>
+              <td>{{ ticket.category }}</td>
+              <td>{{ ticket.priority }}</td>
+              <td>{{ ticket.status }}</td>
+              <td>{{ ticket.open_tickets }}</td>
+          </tr>
+          {% endfor %}
+      </tbody>
+  </table>
+
+  <h2>Ticket Trends</h2>
+  <canvas id="ticketChart"></canvas>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+      var ctx = document.getElementById('ticketChart').getContext('2d');
+      var ticketChart = new Chart(ctx, {
+          type: 'pie',
+          data: {
+              labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+              datasets: [{
+                  label: 'Tickets Opened', 
+                  data: status_data === ticket_opened,
+                  backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                  borderColor: 'rgba(75, 192, 192, 1)',
+                  borderWidth: 3
+              }],
+          data: { 
+            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+            datasets: [{
+                label: 'Tickets closed', 
+                data: status_data === ticket_closed,
+                backgroundColor: 'red',
+                borderColor: 'black',
+                borderWidth: 3
+            }]
+          }
+          },
+          options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              scales: {
+                  y: {
+                      beginAtZero: true
+                  }
+              }
+          }
+      });
+  </script>
+{% endblock %}  
+
+{% block footer %} 
+
+{% endblock %}
